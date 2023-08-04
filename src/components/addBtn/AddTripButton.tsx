@@ -1,8 +1,12 @@
 import styles from "./AddTripButton.module.css";
 
-const AddTripButton = () => {
+type AddTripButtonPropsType = {
+  onClick: React.MouseEventHandler<HTMLButtonElement>;
+};
+
+const AddTripButton = ({ onClick }: AddTripButtonPropsType) => {
   return (
-    <button className={styles.button}>
+    <button onClick={onClick} className={styles.button}>
       <span>+</span> <span>Add trip</span>
     </button>
   );

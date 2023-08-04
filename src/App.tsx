@@ -1,10 +1,11 @@
 import "./App.css";
-import AccountImage from "./components/account/AccountImage";
+import { useState } from "react";
 import AddTripButton from "./components/addBtn/AddTripButton";
 import Aside from "./components/aside/Aside";
 import ForecastDayCard from "./components/ForecastDayCard";
 import SearchTripInput from "./components/search/SearchTripInput";
 import TripCard from "./components/TripCard";
+import AddTripForm from "./components/modal/AddTripForm";
 
 const cities = [
   {
@@ -25,6 +26,8 @@ const cities = [
 ];
 
 function App() {
+  const [addTripModalIsVisible, setAddTripModalIsVisible] = useState(false);
+
   return (
     <>
       <div className="flex">
@@ -41,7 +44,9 @@ function App() {
                 </li>
               ))}
             </ul>
-            <AddTripButton />
+            <AddTripButton
+              onClick={() => setAddTripModalIsVisible((prev) => !prev)}
+            />
           </div>
           <div>
             <h2>Week</h2>
@@ -58,6 +63,9 @@ function App() {
         </div>
         <Aside />
       </div>
+      {addTripModalIsVisible && (
+        <AddTripForm onClick={() => setAddTripModalIsVisible(false)} />
+      )}
     </>
   );
 }
