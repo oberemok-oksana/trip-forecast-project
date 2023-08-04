@@ -1,0 +1,19 @@
+.wrapper {
+  position: relative;
+}
+
+.search {
+  background-color: #f1f3f7;
+  padding: 15px 10px 15px 40px;
+  border-radius: 4px;
+  border: 1px solid #f1f3f7;
+  font-weight: bold;
+}
+
+.img {
+  position: absolute;
+  display: block;
+  left: 1%;
+  top: 34%;
+  width: 20px;
+}

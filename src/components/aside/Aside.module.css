@@ -1,0 +1,68 @@
+.aside {
+  background-color: #1d1a44;
+  color: #fff;
+  flex-basis: 40%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.description-wrapper {
+  text-align: center;
+  margin: 10px 0 190px 0;
+}
+
+.weather-wrapper {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+}
+
+.aside-weather__image {
+  display: block;
+  width: 33%;
+}
+
+.degrees {
+  font-size: 40px;
+  position: relative;
+}
+
+.celsius {
+  position: absolute;
+  top: -5px;
+  right: -46%;
+  font-size: 17px;
+}
+
+.timer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 40px;
+}
+
+.timer-cell {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+}
+
+.timer-number {
+  text-transform: uppercase;
+  font-weight: bold;
+  font-size: 19px;
+}
+
+.timer-period {
+  text-transform: uppercase;
+  font-size: 10px;
+  color: rgba(255, 255, 255, 0.7);
+}
+
+.city {
+  font-weight: normal;
+}

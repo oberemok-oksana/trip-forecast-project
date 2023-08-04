@@ -1,0 +1,21 @@
+.image-wrapper {
+  display: flex;
+  justify-content: flex-end;
+  padding: 20px;
+  position: absolute;
+  right: 1%;
+  top: 4%;
+}
+
+.image-background {
+  border-radius: 50%;
+  padding: 10px;
+  background-color: #4cc2b4;
+  width: 40px;
+  display: flex;
+}
+
+.image {
+  display: flex;
+  justify-content: end;
+}

@@ -1,0 +1,38 @@
+body {
+  font-family: "Roboto", sans-serif;
+  margin: 0;
+}
+
+.flex {
+  display: flex;
+}
+
+.container {
+  padding: 20px;
+}
+
+.list {
+  list-style: none;
+  padding-left: 0;
+  display: flex;
+  gap: 35px;
+  margin-top: 0;
+}
+
+.light-weight {
+  font-weight: normal;
+}
+
+.carousel {
+  display: flex;
+  display: flex;
+  align-items: flex-start;
+  gap: 35px;
+  margin-top: 15px;
+}
+
+.days {
+  display: flex;
+  align-items: center;
+  gap: 40px;
+}
