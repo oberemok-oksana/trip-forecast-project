@@ -1,11 +1,14 @@
+import { useState } from "react";
 import styles from "./AddTripForm.module.css";
 import Modal from "./Modal";
 
-type AddTripFormpropsType = {
+type AddTripFormPropsType = {
   onClick: React.MouseEventHandler<HTMLButtonElement>;
 };
 
-const AddTripForm = ({ onClick }: AddTripFormpropsType) => {
+const AddTripForm = ({ onClick }: AddTripFormPropsType) => {
+  const [city, setCity] = useState("");
+
   return (
     <Modal>
       <div className={styles["modal-background"]}>
@@ -20,7 +23,13 @@ const AddTripForm = ({ onClick }: AddTripFormpropsType) => {
             <div className={styles.borders}>
               <label className={styles.label} htmlFor="city">
                 <span className={styles["label-text"]}>City</span>
-                <select className={styles.select} name="city" id="city">
+                <select
+                  className={styles.select}
+                  name="city"
+                  id="city"
+                  onChange={(e) => setCity(e.target.value)}
+                  value={city}
+                >
                   <option value="">Please select a city</option>
                   <option value="Kyiv">Kyiv</option>
                   <option value="Bangkok">Bangkok</option>

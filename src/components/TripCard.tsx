@@ -3,18 +3,22 @@ import styles from "./TripCard.module.css";
 type TripCardPropsType = {
   city: {
     id: string;
-    name: string;
-    src: string;
+    city: string;
+    cityImage: string;
+    startDate: string;
+    endDate: string;
   };
 };
 
 const TripCard = ({ city }: TripCardPropsType) => {
   return (
     <div className={styles.card}>
-      <img className={styles.img} src={city.src} alt={city.name} />
+      <img className={styles.img} src={city.cityImage} alt={city.city} />
       <div className={styles["card__description"]}>
-        <h4>{city.name}</h4>
-        <div className={styles.card__dates}>14.07.2023 - 21.07.2023</div>
+        <h4>{city.city}</h4>
+        <div className={styles.card__dates}>
+          {city.startDate} - {city.endDate}
+        </div>
       </div>
     </div>
   );

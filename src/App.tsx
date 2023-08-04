@@ -6,27 +6,12 @@ import ForecastDayCard from "./components/ForecastDayCard";
 import SearchTripInput from "./components/search/SearchTripInput";
 import TripCard from "./components/TripCard";
 import AddTripForm from "./components/modal/AddTripForm";
-
-const cities = [
-  {
-    name: "Kyiv",
-    src: "/images/kyiv.jpeg",
-    id: "1",
-  },
-  {
-    name: "Bangkok",
-    src: "/images/bangkok.jpg",
-    id: "2",
-  },
-  {
-    name: "Tokyo",
-    src: "/images/tokyo.png",
-    id: "3",
-  },
-];
+import { useSelector, useDispatch } from "react-redux";
+import { RootState } from "./redux/store";
 
 function App() {
   const [addTripModalIsVisible, setAddTripModalIsVisible] = useState(false);
+  const trips = useSelector((state: RootState) => state.trips);
 
   return (
     <>
@@ -38,7 +23,7 @@ function App() {
           <SearchTripInput />
           <div className="carousel">
             <ul className="list">
-              {cities.map((city) => (
+              {trips.map((city) => (
                 <li key={city.id}>
                   <TripCard city={city} />
                 </li>
