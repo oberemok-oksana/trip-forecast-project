@@ -31,7 +31,10 @@ export const tripsSlice = createSlice({
   name: "trips",
   initialState,
   reducers: {
-    addTrip: (state, action: PayloadAction<Omit<TripType, "id">>) => {
+    addTrip: (
+      state,
+      action: PayloadAction<Omit<TripType, "id" | "cityImage">>
+    ) => {
       const trip = {
         ...action.payload,
         cityImage: "/images/tokyo.png",
