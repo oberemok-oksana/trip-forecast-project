@@ -9,6 +9,7 @@ import AddTripForm from "./components/modal/AddTripForm";
 import { useSelector, useDispatch } from "react-redux";
 import { RootState } from "./redux/store";
 import { hideAddTripForm, toggleAddTripForm } from "./redux/slices/uiSlice";
+import { useGetTripWeatherQuery } from "./redux/services/weather";
 
 function App() {
   const addTripModalIsVisible = useSelector(
@@ -16,6 +17,11 @@ function App() {
   );
   const trips = useSelector((state: RootState) => state.trips);
   const dispatch = useDispatch();
+  const { data: tripWeather } = useGetTripWeatherQuery({
+    city: "tokyo",
+    startDate: "2023-08-12",
+    endDate: "2023-08-24",
+  });
 
   return (
     <>
@@ -38,13 +44,16 @@ function App() {
           <div>
             <h2>Week</h2>
             <div className="days">
+              {tripWeather?.days.map((day) => (
+                <ForecastDayCard key={day.datetime} day={day} />
+              ))}
+              {/* <ForecastDayCard />
               <ForecastDayCard />
               <ForecastDayCard />
               <ForecastDayCard />
               <ForecastDayCard />
               <ForecastDayCard />
-              <ForecastDayCard />
-              <ForecastDayCard />
+              <ForecastDayCard /> */}
             </div>
           </div>
         </div>

@@ -1,11 +1,22 @@
-const ForecastDayCard = () => {
+import { getWeekDay } from "../helpers/dates";
+import { DayType } from "../types";
+
+type ForecastDayCardPropsType = {
+  day: DayType;
+};
+
+const ForecastDayCard = ({ day }: ForecastDayCardPropsType) => {
+  const weekDay = getWeekDay(new Date(day.datetime));
+
   return (
     <div>
-      <h4>Monday</h4>
+      <h4>{weekDay}</h4>
       <div>
-        <img src="/images/icons8-sun-40.png" alt="sunny weather" />
+        <img src={`/images/${day.icon}.png`} alt={day.icon} />
       </div>
-      <div>28&deg;/30&deg;</div>
+      <div>
+        {day.tempmin}&deg;/{day.tempmax}&deg;
+      </div>
     </div>
   );
 };

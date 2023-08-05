@@ -3,6 +3,7 @@ import styles from "./AddTripForm.module.css";
 import Modal from "./Modal";
 import { useDispatch } from "react-redux";
 import { addTrip } from "../../redux/slices/tripsSlice";
+import { useGetCitiesQuery } from "../../redux/services/city";
 
 type AddTripFormPropsType = {
   onClick: React.MouseEventHandler<HTMLButtonElement>;
@@ -28,6 +29,8 @@ const AddTripForm = ({ onClick }: AddTripFormPropsType) => {
     resetForm();
   };
 
+  const { data } = useGetCitiesQuery();
+
   return (
     <Modal>
       <div className={styles["modal-background"]}>
@@ -50,10 +53,11 @@ const AddTripForm = ({ onClick }: AddTripFormPropsType) => {
                   onChange={(e) => setCity(e.target.value)}
                 >
                   <option value="">Please select a city</option>
-                  <option value="Kyiv">Kyiv</option>
-                  <option value="Bangkok">Bangkok</option>
-                  <option value="Tokyo">Tokyo</option>
-                  <option value="Chiang Mai">Chiang Mai</option>
+                  {data?.map((city) => (
+                    <option key={city.name} value={city.name}>
+                      {city.name}
+                    </option>
+                  ))}
                 </select>
               </label>
               <label className={styles.label} htmlFor="start-date">

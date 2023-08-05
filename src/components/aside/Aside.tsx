@@ -1,23 +1,31 @@
+import { getWeekDay } from "../../helpers/dates";
+import { useGetTodayWeatherByCityQuery } from "../../redux/services/weather";
 import AccountImage from "../account/AccountImage";
 import styles from "./Aside.module.css";
 
 const Aside = () => {
+  const { data, error, isLoading } = useGetTodayWeatherByCityQuery("kyiv");
+  console.log(data);
+  const today = data?.days?.[0];
+
+  const weekDay = getWeekDay(new Date());
+
   return (
     <aside className={styles.aside}>
       <AccountImage />
       <div className={styles["description-wrapper"]}>
-        <h3>Sunday</h3>
+        <h3>{weekDay}</h3>
         <div className={styles["weather-wrapper"]}>
           <img
             className={styles["weather-image"]}
-            src="/images/icons8-rain-40.png"
-            alt="rain"
+            src={`/images/${today?.icon ?? "cloudy"}.png`}
+            alt={today?.icon}
           />
           <div className={styles.degrees}>
-            24 <span className={styles.celsius}> &deg;C</span>
+            {today?.temp} <span className={styles.celsius}> &deg;C</span>
           </div>
         </div>
-        <h4 className={styles.city}>Berlin</h4>
+        <h4 className={styles.city}>{data?.address}</h4>
       </div>
       <div className={styles.timer}>
         <div className={styles["timer-cell"]}>
