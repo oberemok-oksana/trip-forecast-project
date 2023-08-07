@@ -24,13 +24,6 @@ const initialState: TripsStateType = {
       cityImage: "/images/bangkok.jpg",
       id: nanoid(),
     },
-    {
-      city: "Tokyo",
-      startDate: "17.08.2023",
-      endDate: "23.08.2023",
-      cityImage: "/images/tokyo.png",
-      id: nanoid(),
-    },
   ],
   selectedTrip: { city: "", startDate: "", endDate: "" },
 };

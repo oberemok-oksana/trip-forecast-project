@@ -3,12 +3,14 @@ body {
   margin: 0;
 }
 
-.flex {
-  display: flex;
+.layout {
+  display: grid;
+  grid-template-columns: 1fr 400px;
 }
 
 .container {
   padding: 20px;
+  overflow: auto;
 }
 
 .list {
@@ -25,7 +27,7 @@ body {
 
 .carousel {
   display: flex;
-  display: flex;
+  overflow: auto;
   align-items: flex-start;
   gap: 35px;
   margin-top: 15px;

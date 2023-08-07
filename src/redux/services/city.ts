@@ -2,7 +2,7 @@ import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 import { CityType } from "../../types";
 
 const cities: CityType[] = [
-  { name: "Chiang Mai", image: "/images/bangkok.jpg" },
+  { name: "Chiang Mai", image: "/images/chiangmai.png" },
   { name: "Bangkok", image: "/images/bangkok.jpg" },
   { name: "Tokyo", image: "/images/tokyo.png" },
   { name: "Kyiv", image: "/images/kyiv.jpeg" },

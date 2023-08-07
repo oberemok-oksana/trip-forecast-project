@@ -44,7 +44,7 @@ function App() {
 
   return (
     <>
-      <div className="flex">
+      <div className="layout">
         <div className="container">
           <h1>
             <span className="light-weight">Weather</span> Forecast
