@@ -4,6 +4,7 @@ import Modal from "./Modal";
 import { useDispatch } from "react-redux";
 import { addTrip } from "../../redux/slices/tripsSlice";
 import { useGetCitiesQuery } from "../../redux/services/city";
+import { getMaxDate } from "../../helpers/dates";
 
 type AddTripFormPropsType = {
   onClick: React.MouseEventHandler<HTMLButtonElement>;
@@ -69,6 +70,7 @@ const AddTripForm = ({ onClick }: AddTripFormPropsType) => {
                   placeholder="Select date"
                   value={startDate}
                   onChange={(e) => setStartDate(e.target.value)}
+                  max={getMaxDate()}
                 />
               </label>
               <label className={styles.label} htmlFor="end-date">
@@ -80,6 +82,7 @@ const AddTripForm = ({ onClick }: AddTripFormPropsType) => {
                   placeholder="Select date"
                   value={endDate}
                   onChange={(e) => setEndDate(e.target.value)}
+                  max={getMaxDate()}
                 />
               </label>
             </div>
