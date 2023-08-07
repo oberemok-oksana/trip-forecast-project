@@ -60,3 +60,9 @@ export type CityType = {
   name: string;
   image: string;
 };
+
+export type TripCardType = {
+  city: string;
+  startDate: string;
+  endDate: string;
+};

@@ -1,12 +1,19 @@
 import styles from "./SearchTripInput.module.css";
 
-const SearchTripInput = () => {
+type SearchTripInputPropsType = {
+  value: string;
+  onChange: (value: string) => void;
+};
+
+const SearchTripInput = ({ value, onChange }: SearchTripInputPropsType) => {
   return (
     <div className={styles.wrapper}>
       <input
         className={styles.search}
         type="text"
         placeholder="Search your trip"
+        onChange={(e) => onChange(e.target.value)}
+        value={value}
       />
       <img
         className={styles.img}

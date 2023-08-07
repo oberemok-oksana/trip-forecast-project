@@ -1,5 +1,4 @@
 import "./App.css";
-import { useState } from "react";
 import AddTripButton from "./components/addBtn/AddTripButton";
 import Aside from "./components/aside/Aside";
 import ForecastDayCard from "./components/ForecastDayCard";
@@ -10,19 +9,24 @@ import { useSelector, useDispatch } from "react-redux";
 import { RootState } from "./redux/store";
 import { hideAddTripForm, toggleAddTripForm } from "./redux/slices/uiSlice";
 import { useGetTripWeatherQuery } from "./redux/services/weather";
+import { useState } from "react";
 
 function App() {
+  const [cityInput, setCityInput] = useState("");
+  const [trip, setTrip] = useState({ city: "", startDate: "", endDate: "" });
   const addTripModalIsVisible = useSelector(
     (state: RootState) => state.ui.creating
   );
   const trips = useSelector((state: RootState) => state.trips);
   const dispatch = useDispatch();
   const { data: tripWeather } = useGetTripWeatherQuery({
-    city: "tokyo",
-    startDate: "2023-08-12",
-    endDate: "2023-08-24",
+    // city: "tokyo",
+    // startDate: "2023-08-12",
+    // endDate: "2023-08-24",
+    ...trip,
   });
 
+  console.log(trip);
   return (
     <>
       <div className="flex">
@@ -30,11 +34,23 @@ function App() {
           <h1>
             <span className="light-weight">Weather</span> Forecast
           </h1>
-          <SearchTripInput />
+          <SearchTripInput
+            value={cityInput}
+            onChange={(cityInput) => setCityInput(cityInput)}
+          />
           <div className="carousel">
             <ul className="list">
               {trips.map((city) => (
-                <li key={city.id}>
+                <li
+                  key={city.id}
+                  onClick={() =>
+                    setTrip({
+                      city: city.city,
+                      startDate: city.startDate.split(".").reverse().join("-"),
+                      endDate: city.endDate.split(".").reverse().join("-"),
+                    })
+                  }
+                >
                   <TripCard city={city} />
                 </li>
               ))}
@@ -47,13 +63,6 @@ function App() {
               {tripWeather?.days.map((day) => (
                 <ForecastDayCard key={day.datetime} day={day} />
               ))}
-              {/* <ForecastDayCard />
-              <ForecastDayCard />
-              <ForecastDayCard />
-              <ForecastDayCard />
-              <ForecastDayCard />
-              <ForecastDayCard />
-              <ForecastDayCard /> */}
             </div>
           </div>
         </div>
