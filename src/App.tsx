@@ -12,11 +12,11 @@ import { useGetTripWeatherQuery } from "./redux/services/weather";
 import { useState } from "react";
 
 function App() {
-  const [cityInput, setCityInput] = useState("");
   const [trip, setTrip] = useState({ city: "", startDate: "", endDate: "" });
   const addTripModalIsVisible = useSelector(
     (state: RootState) => state.ui.creating
   );
+  const searchValue = useSelector((state: RootState) => state.ui.tripSearch);
   const trips = useSelector((state: RootState) => state.trips);
   const dispatch = useDispatch();
   const { data: tripWeather } = useGetTripWeatherQuery({
@@ -25,6 +25,9 @@ function App() {
     // endDate: "2023-08-24",
     ...trip,
   });
+  const filteredTripsBySearchValue = trips.filter((item) =>
+    item.city.toLowerCase().startsWith(searchValue.toLowerCase())
+  );
 
   console.log(trip);
   return (
@@ -34,27 +37,34 @@ function App() {
           <h1>
             <span className="light-weight">Weather</span> Forecast
           </h1>
-          <SearchTripInput
-            value={cityInput}
-            onChange={(cityInput) => setCityInput(cityInput)}
-          />
+          <SearchTripInput />
           <div className="carousel">
-            <ul className="list">
-              {trips.map((city) => (
-                <li
-                  key={city.id}
-                  onClick={() =>
-                    setTrip({
-                      city: city.city,
-                      startDate: city.startDate.split(".").reverse().join("-"),
-                      endDate: city.endDate.split(".").reverse().join("-"),
-                    })
-                  }
-                >
-                  <TripCard city={city} />
-                </li>
+            {searchValue &&
+              filteredTripsBySearchValue.map((item) => (
+                <TripCard city={item} />
               ))}
-            </ul>
+            {!searchValue && (
+              <ul className="list">
+                {trips.map((city) => (
+                  <li
+                    key={city.id}
+                    onClick={() =>
+                      setTrip({
+                        city: city.city,
+                        startDate: city.startDate
+                          .split(".")
+                          .reverse()
+                          .join("-"),
+                        endDate: city.endDate.split(".").reverse().join("-"),
+                      })
+                    }
+                  >
+                    <TripCard city={city} />
+                  </li>
+                ))}
+              </ul>
+            )}
+
             <AddTripButton onClick={() => dispatch(toggleAddTripForm())} />
           </div>
           <div>
