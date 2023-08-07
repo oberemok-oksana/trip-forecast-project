@@ -1,11 +1,15 @@
 import { getWeekDay } from "../../helpers/dates";
 import { useGetTodayWeatherByCityQuery } from "../../redux/services/weather";
+import { RootState } from "../../redux/store";
 import AccountImage from "../account/AccountImage";
 import styles from "./Aside.module.css";
+import { useSelector } from "react-redux";
 
 const Aside = () => {
-  const { data, error, isLoading } = useGetTodayWeatherByCityQuery("kyiv");
-  console.log(data);
+  const chosenCity =
+    useSelector((state: RootState) => state.trips.selectedTrip) || "Kyiv";
+  const { data } = useGetTodayWeatherByCityQuery(chosenCity.city || "Kyiv");
+
   const today = data?.days?.[0];
 
   const weekDay = getWeekDay(new Date());

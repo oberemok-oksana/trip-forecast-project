@@ -1,50 +1,57 @@
 import { createSlice } from "@reduxjs/toolkit";
 import type { PayloadAction } from "@reduxjs/toolkit";
-import { TripType } from "../../types";
+import { TripType, SelectedTripType } from "../../types";
 import { nanoid } from "nanoid";
 
-const initialState: TripType[] = [
-  {
-    city: "Kyiv",
-    startDate: "01.05.2023",
-    endDate: "11.05.2023",
-    cityImage: "/images/kyiv.jpeg",
-    id: nanoid(),
-  },
-  {
-    city: "Bangkok",
-    startDate: "07.09.2023",
-    endDate: "28.09.2023",
-    cityImage: "/images/bangkok.jpg",
-    id: nanoid(),
-  },
-  {
-    city: "Tokyo",
-    startDate: "17.10.2023",
-    endDate: "28.10.2023",
-    cityImage: "/images/tokyo.png",
-    id: nanoid(),
-  },
-];
+type TripsStateType = {
+  trips: TripType[];
+  selectedTrip: { city: string; startDate: string; endDate: string };
+};
+
+const initialState: TripsStateType = {
+  trips: [
+    {
+      city: "Kyiv",
+      startDate: "01.08.2023",
+      endDate: "10.08.2023",
+      cityImage: "/images/kyiv.jpeg",
+      id: nanoid(),
+    },
+    {
+      city: "Bangkok",
+      startDate: "07.08.2023",
+      endDate: "12.08.2023",
+      cityImage: "/images/bangkok.jpg",
+      id: nanoid(),
+    },
+    {
+      city: "Tokyo",
+      startDate: "17.08.2023",
+      endDate: "23.08.2023",
+      cityImage: "/images/tokyo.png",
+      id: nanoid(),
+    },
+  ],
+  selectedTrip: { city: "", startDate: "", endDate: "" },
+};
 
 export const tripsSlice = createSlice({
   name: "trips",
   initialState,
   reducers: {
-    addTrip: (
-      state,
-      action: PayloadAction<Omit<TripType, "id" | "cityImage">>
-    ) => {
+    addTrip: (state, action: PayloadAction<Omit<TripType, "id">>) => {
       const trip = {
         ...action.payload,
-        cityImage: "/images/tokyo.png",
         id: nanoid(),
       };
-      state.push(trip);
+      state.trips.push(trip);
+    },
+    selectTrip: (state, action: PayloadAction<SelectedTripType>) => {
+      state.selectedTrip = action.payload;
     },
   },
 });
 
-export const { addTrip } = tripsSlice.actions;
+export const { addTrip, selectTrip } = tripsSlice.actions;
 
 export default tripsSlice.reducer;

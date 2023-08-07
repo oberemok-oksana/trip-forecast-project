@@ -61,8 +61,4 @@ export type CityType = {
   image: string;
 };
 
-export type TripCardType = {
-  city: string;
-  startDate: string;
-  endDate: string;
-};
+export type SelectedTripType = Omit<TripType, "id" | "cityImage">;

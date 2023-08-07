@@ -13,6 +13,7 @@ const AddTripForm = ({ onClick }: AddTripFormPropsType) => {
   const [city, setCity] = useState("");
   const [startDate, setStartDate] = useState("");
   const [endDate, setEndDate] = useState("");
+  const { data } = useGetCitiesQuery();
 
   const dispatch = useDispatch();
 
@@ -24,12 +25,11 @@ const AddTripForm = ({ onClick }: AddTripFormPropsType) => {
 
   const submitTrip = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    const trip = { city, startDate, endDate };
+    const image = data?.find((item) => item.name === city)?.image;
+    const trip = { city, startDate, endDate, cityImage: image as string };
     dispatch(addTrip(trip));
     resetForm();
   };
-
-  const { data } = useGetCitiesQuery();
 
   return (
     <Modal>

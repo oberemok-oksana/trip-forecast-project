@@ -9,27 +9,39 @@ import { useSelector, useDispatch } from "react-redux";
 import { RootState } from "./redux/store";
 import { hideAddTripForm, toggleAddTripForm } from "./redux/slices/uiSlice";
 import { useGetTripWeatherQuery } from "./redux/services/weather";
-import { useState } from "react";
+import { selectTrip } from "./redux/slices/tripsSlice";
+import { SelectedTripType } from "./types";
 
 function App() {
-  const [trip, setTrip] = useState({ city: "", startDate: "", endDate: "" });
   const addTripModalIsVisible = useSelector(
     (state: RootState) => state.ui.creating
   );
   const searchValue = useSelector((state: RootState) => state.ui.tripSearch);
-  const trips = useSelector((state: RootState) => state.trips);
+  const trips = useSelector((state: RootState) => state.trips.trips);
+  const selectedTrip = useSelector(
+    (state: RootState) => state.trips.selectedTrip
+  );
   const dispatch = useDispatch();
   const { data: tripWeather } = useGetTripWeatherQuery({
     // city: "tokyo",
     // startDate: "2023-08-12",
     // endDate: "2023-08-24",
-    ...trip,
+    ...selectedTrip,
   });
   const filteredTripsBySearchValue = trips.filter((item) =>
     item.city.toLowerCase().startsWith(searchValue.toLowerCase())
   );
 
-  console.log(trip);
+  const handleSelectTrip = (item: SelectedTripType) => {
+    dispatch(
+      selectTrip({
+        city: item.city,
+        startDate: item.startDate.split(".").reverse().join("-"),
+        endDate: item.endDate.split(".").reverse().join("-"),
+      })
+    );
+  };
+
   return (
     <>
       <div className="flex">
@@ -41,24 +53,14 @@ function App() {
           <div className="carousel">
             {searchValue &&
               filteredTripsBySearchValue.map((item) => (
-                <TripCard city={item} />
+                <div onClick={() => handleSelectTrip(item)}>
+                  <TripCard city={item} />
+                </div>
               ))}
             {!searchValue && (
               <ul className="list">
                 {trips.map((city) => (
-                  <li
-                    key={city.id}
-                    onClick={() =>
-                      setTrip({
-                        city: city.city,
-                        startDate: city.startDate
-                          .split(".")
-                          .reverse()
-                          .join("-"),
-                        endDate: city.endDate.split(".").reverse().join("-"),
-                      })
-                    }
-                  >
+                  <li key={city.id} onClick={() => handleSelectTrip(city)}>
                     <TripCard city={city} />
                   </li>
                 ))}
