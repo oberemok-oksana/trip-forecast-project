@@ -22,7 +22,8 @@ const Aside = () => {
             alt={today?.icon}
           />
           <div className={styles.degrees}>
-            {today?.temp} <span className={styles.celsius}> &deg;C</span>
+            {Math.round(Number(today?.temp))}{" "}
+            <span className={styles.celsius}> &deg;C</span>
           </div>
         </div>
         <h4 className={styles.city}>{data?.address}</h4>

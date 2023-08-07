@@ -15,7 +15,7 @@ const ForecastDayCard = ({ day }: ForecastDayCardPropsType) => {
         <img src={`/images/${day.icon}.png`} alt={day.icon} />
       </div>
       <div>
-        {day.tempmin}&deg;/{day.tempmax}&deg;
+        {Math.round(day.tempmin)}&deg;/{Math.round(day.tempmax)}&deg;
       </div>
     </div>
   );
