@@ -1,5 +1,5 @@
-import { getWeekDay } from "../helpers/dates";
-import { DayType } from "../types";
+import { getWeekDay } from "../../helpers/dates";
+import { DayType } from "../../types";
 
 type ForecastDayCardPropsType = {
   day: DayType;

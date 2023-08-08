@@ -36,5 +36,6 @@ body {
 .days {
   display: flex;
   align-items: center;
+  overflow: auto;
   gap: 40px;
 }

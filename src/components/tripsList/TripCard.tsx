@@ -1,4 +1,4 @@
-import { formatStringDate } from "../helpers/dates";
+import { formatStringDate } from "../../helpers/dates";
 import styles from "./TripCard.module.css";
 
 type TripCardPropsType = {
