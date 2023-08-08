@@ -21,3 +21,16 @@ export const formatStringDate = (dateString: string) => {
 
   return formattedDate;
 };
+
+export const getTodayDateString = () => {
+  const today = new Date().toISOString().split("T")[0];
+  return today;
+};
+
+export const getTimeForTimer = (startDate: string) => {
+  const startDateMS = new Date(startDate).getTime();
+  const todayMS = new Date().getTime();
+  const ms = startDateMS - todayMS;
+
+  return ms;
+};

@@ -4,6 +4,7 @@ import { RootState } from "../../redux/store";
 import AccountImage from "../account/AccountImage";
 import styles from "./Aside.module.css";
 import { useSelector } from "react-redux";
+import Timer from "./timer/Timer";
 
 const Aside = () => {
   const chosenCity = useSelector(
@@ -33,24 +34,7 @@ const Aside = () => {
         </div>
         <h4 className={styles.city}>{data?.address}</h4>
       </div>
-      <div className={styles.timer}>
-        <div className={styles["timer-cell"]}>
-          <span className={styles["timer-number"]}>30</span>
-          <span className={styles["timer-period"]}>days</span>
-        </div>
-        <div className={styles["timer-cell"]}>
-          <span className={styles["timer-number"]}>15</span>
-          <span className={styles["timer-period"]}>hours</span>
-        </div>
-        <div className={styles["timer-cell"]}>
-          <span className={styles["timer-number"]}>15</span>
-          <span className={styles["timer-period"]}>minutes</span>
-        </div>
-        <div className={styles["timer-cell"]}>
-          <span className={styles["timer-number"]}>30</span>
-          <span className={styles["timer-period"]}>seconds</span>
-        </div>
-      </div>
+      <Timer />
     </aside>
   );
 };

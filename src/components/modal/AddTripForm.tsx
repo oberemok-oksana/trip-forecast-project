@@ -4,7 +4,7 @@ import Modal from "./Modal";
 import { useDispatch } from "react-redux";
 import { addTrip } from "../../redux/slices/tripsSlice";
 import { useGetCitiesQuery } from "../../redux/services/city";
-import { getMaxDate } from "../../helpers/dates";
+import { getMaxDate, getTodayDateString } from "../../helpers/dates";
 
 type AddTripFormPropsType = {
   onClick: React.MouseEventHandler<HTMLButtonElement>;
@@ -32,6 +32,8 @@ const AddTripForm = ({ onClick }: AddTripFormPropsType) => {
     resetForm();
   };
 
+  const today = getTodayDateString();
+
   return (
     <Modal>
       <div className={styles["modal-background"]}>
@@ -47,6 +49,7 @@ const AddTripForm = ({ onClick }: AddTripFormPropsType) => {
               <label className={styles.label} htmlFor="city">
                 <span className={styles["label-text"]}>City</span>
                 <select
+                  required
                   className={styles.select}
                   name="city"
                   id="city"
@@ -70,18 +73,22 @@ const AddTripForm = ({ onClick }: AddTripFormPropsType) => {
                   placeholder="Select date"
                   value={startDate}
                   onChange={(e) => setStartDate(e.target.value)}
+                  min={today}
                   max={getMaxDate()}
+                  required
                 />
               </label>
               <label className={styles.label} htmlFor="end-date">
                 <span className={styles["label-text"]}>End date</span>
                 <input
+                  required
                   className={styles.input}
                   name="end-date"
                   type="date"
                   placeholder="Select date"
                   value={endDate}
                   onChange={(e) => setEndDate(e.target.value)}
+                  min={today}
                   max={getMaxDate()}
                 />
               </label>

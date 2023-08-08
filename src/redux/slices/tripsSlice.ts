@@ -6,15 +6,15 @@ import { nanoid } from "nanoid";
 const defaultTrips: TripType[] = [
   {
     city: "Kyiv",
-    startDate: "2023-08-01",
-    endDate: "2023-08-10",
+    startDate: "2023-08-08",
+    endDate: "2023-08-15",
     cityImage: "/images/kyiv.jpeg",
     id: nanoid(),
   },
   {
     city: "Bangkok",
-    startDate: "2023-08-05",
-    endDate: "2023-08-12",
+    startDate: "2023-08-11",
+    endDate: "2023-08-21",
     cityImage: "/images/bangkok.jpg",
     id: nanoid(),
   },
