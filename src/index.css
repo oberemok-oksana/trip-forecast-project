@@ -1,11 +1,18 @@
+html,
+#root {
+  height: 100%;
+}
+
 body {
   font-family: "Roboto", sans-serif;
+  height: 100%;
   margin: 0;
 }
 
 .layout {
   display: grid;
   grid-template-columns: 1fr 400px;
+  height: 100%;
 }
 
 .container {
