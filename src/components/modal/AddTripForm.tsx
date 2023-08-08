@@ -5,6 +5,7 @@ import { useDispatch } from "react-redux";
 import { addTrip } from "../../redux/slices/tripsSlice";
 import { useGetCitiesQuery } from "../../redux/services/city";
 import { getMaxDate, getTodayDateString } from "../../helpers/dates";
+import { hideAddTripForm } from "../../redux/slices/uiSlice";
 
 type AddTripFormPropsType = {
   onClick: React.MouseEventHandler<HTMLButtonElement>;
@@ -29,6 +30,7 @@ const AddTripForm = ({ onClick }: AddTripFormPropsType) => {
     const image = data?.find((item) => item.name === city)?.image;
     const trip = { city, startDate, endDate, cityImage: image as string };
     dispatch(addTrip(trip));
+    dispatch(hideAddTripForm());
     resetForm();
   };
 

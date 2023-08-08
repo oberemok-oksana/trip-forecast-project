@@ -23,9 +23,6 @@ function App() {
   );
   const dispatch = useDispatch();
   const { data: tripWeather } = useGetTripWeatherQuery({
-    // city: "tokyo",
-    // startDate: "2023-08-12",
-    // endDate: "2023-08-24",
     ...selectedTrip,
   });
   const filteredTripsBySearchValue = trips.filter((item) =>
