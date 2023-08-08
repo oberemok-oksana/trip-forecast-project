@@ -36,8 +36,8 @@ function App() {
     dispatch(
       selectTrip({
         city: item.city,
-        startDate: item.startDate.split(".").reverse().join("-"),
-        endDate: item.endDate.split(".").reverse().join("-"),
+        startDate: item.startDate,
+        endDate: item.endDate,
       })
     );
   };

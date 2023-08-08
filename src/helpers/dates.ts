@@ -9,3 +9,15 @@ export const getMaxDate = () => {
   const maxPeriod = allowedPeriod.toISOString().split("T")[0];
   return maxPeriod;
 };
+
+export const formatStringDate = (dateString: string) => {
+  const date = new Date(dateString);
+
+  const formattedDate = new Intl.DateTimeFormat("de-DE", {
+    year: "numeric",
+    month: "2-digit",
+    day: "2-digit",
+  }).format(date);
+
+  return formattedDate;
+};

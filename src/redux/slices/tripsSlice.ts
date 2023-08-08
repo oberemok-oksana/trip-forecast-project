@@ -3,29 +3,35 @@ import type { PayloadAction } from "@reduxjs/toolkit";
 import { TripType, SelectedTripType } from "../../types";
 import { nanoid } from "nanoid";
 
+const defaultTrips: TripType[] = [
+  {
+    city: "Kyiv",
+    startDate: "2023-08-01",
+    endDate: "2023-08-10",
+    cityImage: "/images/kyiv.jpeg",
+    id: nanoid(),
+  },
+  {
+    city: "Bangkok",
+    startDate: "2023-08-05",
+    endDate: "2023-08-12",
+    cityImage: "/images/bangkok.jpg",
+    id: nanoid(),
+  },
+];
+
 type TripsStateType = {
   trips: TripType[];
   selectedTrip: { city: string; startDate: string; endDate: string };
 };
 
 const initialState: TripsStateType = {
-  trips: [
-    {
-      city: "Kyiv",
-      startDate: "01.08.2023",
-      endDate: "10.08.2023",
-      cityImage: "/images/kyiv.jpeg",
-      id: nanoid(),
-    },
-    {
-      city: "Bangkok",
-      startDate: "07.08.2023",
-      endDate: "12.08.2023",
-      cityImage: "/images/bangkok.jpg",
-      id: nanoid(),
-    },
-  ],
-  selectedTrip: { city: "", startDate: "", endDate: "" },
+  trips: defaultTrips,
+  selectedTrip: {
+    city: defaultTrips[0].city,
+    startDate: defaultTrips[0].startDate,
+    endDate: defaultTrips[0].endDate,
+  },
 };
 
 export const tripsSlice = createSlice({

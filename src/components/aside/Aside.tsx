@@ -6,9 +6,10 @@ import styles from "./Aside.module.css";
 import { useSelector } from "react-redux";
 
 const Aside = () => {
-  const chosenCity =
-    useSelector((state: RootState) => state.trips.selectedTrip) || "Kyiv";
-  const { data } = useGetTodayWeatherByCityQuery(chosenCity.city || "Kyiv");
+  const chosenCity = useSelector(
+    (state: RootState) => state.trips.selectedTrip
+  );
+  const { data } = useGetTodayWeatherByCityQuery(chosenCity.city);
 
   const today = data?.days?.[0];
 

@@ -1,3 +1,4 @@
+import { formatStringDate } from "../helpers/dates";
 import styles from "./TripCard.module.css";
 
 type TripCardPropsType = {
@@ -17,7 +18,7 @@ const TripCard = ({ city }: TripCardPropsType) => {
       <div className={styles["card__description"]}>
         <h4>{city.city}</h4>
         <div className={styles.card__dates}>
-          {city.startDate} - {city.endDate}
+          {formatStringDate(city.startDate)} - {formatStringDate(city.endDate)}
         </div>
       </div>
     </div>
