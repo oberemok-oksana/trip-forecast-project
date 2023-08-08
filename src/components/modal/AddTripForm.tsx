@@ -35,6 +35,9 @@ const AddTripForm = ({ onClick }: AddTripFormPropsType) => {
   };
 
   const today = getTodayDateString();
+  const sortedPredefinedCities = data
+    ? [...data].sort((cityA, cityB) => cityA.name.localeCompare(cityB.name))
+    : data;
 
   return (
     <Modal>
@@ -59,7 +62,7 @@ const AddTripForm = ({ onClick }: AddTripFormPropsType) => {
                   onChange={(e) => setCity(e.target.value)}
                 >
                   <option value="">Please select a city</option>
-                  {data?.map((city) => (
+                  {sortedPredefinedCities?.map((city) => (
                     <option key={city.name} value={city.name}>
                       {city.name}
                     </option>
