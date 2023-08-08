@@ -14,6 +14,10 @@ const TripsList = () => {
   const filteredTripsBySearchValue = trips.filter((item) =>
     item.city.toLowerCase().startsWith(searchValue.toLowerCase())
   );
+  const sortedTripsByStartDate = [...trips].sort(
+    (tripA, tripB) =>
+      new Date(tripA.startDate).getTime() - new Date(tripB.startDate).getTime()
+  );
 
   const handleSelectTrip = (item: SelectedTripType) => {
     dispatch(
@@ -35,7 +39,7 @@ const TripsList = () => {
         ))}
       {!searchValue && (
         <ul className="list">
-          {trips.map((city) => (
+          {sortedTripsByStartDate.map((city) => (
             <li key={city.id} onClick={() => handleSelectTrip(city)}>
               <TripCard city={city} />
             </li>
