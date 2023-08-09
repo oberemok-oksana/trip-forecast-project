@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useRef } from "react";
 import styles from "./AddTripForm.module.css";
 import Modal from "./Modal";
 import { useDispatch } from "react-redux";
@@ -7,11 +7,8 @@ import { useGetCitiesQuery } from "../../redux/services/city";
 import { getMaxDate, getTodayDateString } from "../../helpers/dates";
 import { hideAddTripForm } from "../../redux/slices/uiSlice";
 
-type AddTripFormPropsType = {
-  onClick: React.MouseEventHandler<HTMLButtonElement>;
-};
-
-const AddTripForm = ({ onClick }: AddTripFormPropsType) => {
+const AddTripForm = () => {
+  const content = useRef<HTMLDivElement>(null);
   const [city, setCity] = useState("");
   const [startDate, setStartDate] = useState("");
   const [endDate, setEndDate] = useState("");
@@ -41,11 +38,22 @@ const AddTripForm = ({ onClick }: AddTripFormPropsType) => {
 
   return (
     <Modal>
-      <div className={styles["modal-background"]}>
-        <div className={styles.modal}>
+      <div
+        className={styles["modal-background"]}
+        onClick={(e) => {
+          console.log(e.currentTarget, content.current);
+          if (content?.current && !content.current.contains(e.target as Node)) {
+            dispatch(hideAddTripForm());
+          }
+        }}
+      >
+        <div className={styles.modal} ref={content}>
           <div className={styles["form-head"]}>
             <h3>Create trip</h3>
-            <button onClick={onClick} className={styles.close}>
+            <button
+              onClick={() => dispatch(hideAddTripForm())}
+              className={styles.close}
+            >
               x
             </button>
           </div>
@@ -99,7 +107,10 @@ const AddTripForm = ({ onClick }: AddTripFormPropsType) => {
               </label>
             </div>
             <div className={styles.buttons}>
-              <button onClick={onClick} className={styles.button}>
+              <button
+                onClick={() => dispatch(hideAddTripForm())}
+                className={styles.button}
+              >
                 Cancel
               </button>
               <button

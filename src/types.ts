@@ -31,7 +31,7 @@ export type DayType = {
   precip: number;
   precipprob: number;
   precipcover: number;
-  preciptype: any;
+  preciptype: string[] | null;
   snow: number;
   snowdepth: number;
   windgust: number;

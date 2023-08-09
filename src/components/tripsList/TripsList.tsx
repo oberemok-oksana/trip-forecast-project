@@ -4,19 +4,29 @@ import AddTripButton from "../addBtn/AddTripButton";
 import TripCard from "./TripCard";
 import { SelectedTripType } from "../../types";
 import { selectTrip } from "../../redux/slices/tripsSlice";
-import { toggleAddTripForm } from "../../redux/slices/uiSlice";
+import { useMemo } from "react";
 
 const TripsList = () => {
   const searchValue = useSelector((state: RootState) => state.ui.tripSearch);
   const trips = useSelector((state: RootState) => state.trips.trips);
   const dispatch = useDispatch();
 
-  const filteredTripsBySearchValue = trips.filter((item) =>
-    item.city.toLowerCase().startsWith(searchValue.toLowerCase())
+  const sortedTripsByStartDate = useMemo(
+    () =>
+      [...trips].sort(
+        (tripA, tripB) =>
+          new Date(tripA.startDate).getTime() -
+          new Date(tripB.startDate).getTime()
+      ),
+    [trips]
   );
-  const sortedTripsByStartDate = [...trips].sort(
-    (tripA, tripB) =>
-      new Date(tripA.startDate).getTime() - new Date(tripB.startDate).getTime()
+
+  const filteredTripsBySearchValue = useMemo(
+    () =>
+      sortedTripsByStartDate.filter((item) =>
+        item.city.toLowerCase().startsWith(searchValue.toLowerCase())
+      ),
+    [searchValue, sortedTripsByStartDate]
   );
 
   const handleSelectTrip = (item: SelectedTripType) => {
@@ -31,23 +41,15 @@ const TripsList = () => {
 
   return (
     <div className="carousel">
-      {searchValue &&
-        filteredTripsBySearchValue.map((item) => (
-          <div key={item.id} onClick={() => handleSelectTrip(item)}>
-            <TripCard city={item} />
-          </div>
+      <ul className="list">
+        {filteredTripsBySearchValue.map((city) => (
+          <li key={city.id} onClick={() => handleSelectTrip(city)}>
+            <TripCard city={city} />
+          </li>
         ))}
-      {!searchValue && (
-        <ul className="list">
-          {sortedTripsByStartDate.map((city) => (
-            <li key={city.id} onClick={() => handleSelectTrip(city)}>
-              <TripCard city={city} />
-            </li>
-          ))}
-        </ul>
-      )}
+      </ul>
 
-      <AddTripButton onClick={() => dispatch(toggleAddTripForm())} />
+      <AddTripButton />
     </div>
   );
 };

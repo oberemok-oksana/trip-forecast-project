@@ -7,9 +7,7 @@ const FullTripForecast = () => {
   const selectedTrip = useSelector(
     (state: RootState) => state.trips.selectedTrip
   );
-  const { data: tripWeather } = useGetTripWeatherQuery({
-    ...selectedTrip,
-  });
+  const { data: tripWeather } = useGetTripWeatherQuery(selectedTrip);
 
   return (
     <div>
