@@ -9,7 +9,7 @@ const ForecastDayCard = ({ day }: ForecastDayCardPropsType) => {
   const weekDay = getWeekDay(new Date(day.datetime));
 
   return (
-    <div>
+    <div className="day">
       <h4>{weekDay}</h4>
       <div>
         <img src={`/images/${day.icon}.png`} alt={day.icon} />

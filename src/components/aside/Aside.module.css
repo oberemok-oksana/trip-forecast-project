@@ -40,3 +40,13 @@
 .city {
   font-weight: normal;
 }
+
+@media (max-width: 480px) {
+  .aside {
+    padding-bottom: 30px;
+  }
+
+  .description-wrapper {
+    margin: 10px 0 20px 0;
+  }
+}

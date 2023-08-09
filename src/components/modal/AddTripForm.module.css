@@ -127,3 +127,14 @@
   color: #686666a6;
   cursor: pointer;
 }
+
+@media (max-width: 480px) {
+  .modal {
+    width: 250px;
+    top: calc(50% - 200px);
+  }
+
+  .borders {
+    padding: 10px 0;
+  }
+}

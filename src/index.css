@@ -46,3 +46,36 @@ body {
   overflow: auto;
   gap: 40px;
 }
+
+@media (max-width: 480px) {
+  .layout {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+  }
+
+  .container {
+    padding: 20px;
+    overflow: visible;
+  }
+
+  .carousel {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .list {
+    flex-direction: column;
+  }
+
+  .days {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .day {
+    align-items: center;
+    flex-direction: column;
+    display: flex;
+  }
+}
